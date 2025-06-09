@@ -1,6 +1,7 @@
 {
     "name": "evanperreau/laravel-feature-flags-lite",
     "description": "A lightweight and simple solution to manage feature flags in your Laravel applications",
+    "license": "MIT",
     "type": "library",
     "autoload": {
         "psr-4": {
