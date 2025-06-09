@@ -1,0 +1,45 @@
+{
+    "name": "evanperreau/laravel-feature-flags-lite",
+    "description": "A lightweight and simple solution to manage feature flags in your Laravel applications",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Evanperreau\\LaravelFeatureFlagsLite\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Evanperreau\\LaravelFeatureFlagsLite\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "EvanPerreau",
+            "email": "contact@evan-perreau.fr"
+        }
+    ],
+    "require": {
+        "php": ">=8.4",
+        "illuminate/support": "^12.17"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10",
+        "phpunit/phpunit": "^12"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Evanperreau\\LaravelFeatureFlagsLite\\FeatureFlagsServiceProvider"
+            ],
+            "aliases": {
+                "Feature": "Evanperreau\\LaravelFeatureFlagsLite\\Facades\\Feature"
+            }
+        }
+    }
+}
