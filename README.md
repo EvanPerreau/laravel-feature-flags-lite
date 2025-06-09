@@ -111,6 +111,37 @@ You can easily use feature flags in your Blade views:
 @endif
 ```
 
+### Using the middleware
+
+You can protect routes or groups of routes with the feature flag middleware. If the feature flag is disabled, the request will be aborted with a 404 response by default.
+
+#### Protecting a single route
+
+```php
+// Only accessible if 'premium_feature' is enabled
+Route::get('/premium-content', 'PremiumController@index')
+    ->middleware('feature:premium_feature');
+```
+
+#### Protecting a route with custom status code
+
+```php
+// Returns 403 Forbidden if 'beta_feature' is disabled
+Route::get('/beta-feature', 'BetaController@index')
+    ->middleware('feature:beta_feature,403');
+```
+
+#### Protecting a group of routes
+
+```php
+// All routes in this group require 'admin_panel' to be enabled
+Route::middleware('feature:admin_panel')->group(function () {
+    Route::get('/admin/dashboard', 'AdminController@dashboard');
+    Route::get('/admin/users', 'AdminController@users');
+    Route::get('/admin/settings', 'AdminController@settings');
+});
+```
+
 ## 📝 Best Practices
 
 ### Naming feature flags

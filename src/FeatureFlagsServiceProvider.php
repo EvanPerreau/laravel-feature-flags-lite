@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Evanperreau\LaravelFeatureFlagsLite;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\Router;
+use Evanperreau\LaravelFeatureFlagsLite\Middlewares\FeatureFlagsMiddleware;
 
 class FeatureFlagsServiceProvider extends ServiceProvider
 {
@@ -36,7 +38,19 @@ class FeatureFlagsServiceProvider extends ServiceProvider
             __DIR__ . '/../config/features.php' => config_path('features.php'),
         ], 'config');
 
+        $this->registerMiddleware();
         $this->loadHelpers();
+    }
+    
+    /**
+     * Register the middleware with the router.
+     *
+     * @return void
+     */
+    protected function registerMiddleware(): void
+    {
+        $router = $this->app->make(Router::class);
+        $router->aliasMiddleware('feature', FeatureFlagsMiddleware::class);
     }
 
     /**
